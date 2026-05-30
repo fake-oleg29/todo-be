@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  backend:
+    build: .
+    container_name: todo-backend
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: 3000
+      JWT_SECRET: supersecretkey
+      FRONTEND_URL: http://localhost:5173
+    volumes:
+      - sqlite-data:/app/data
+    restart: unless-stopped
+volumes:
+  sqlite-data:
