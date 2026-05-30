@@ -14,7 +14,6 @@ export interface UserRow {
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   private db!: Database.Database;
 
-  /** Resolved path to SQLite file (project root / data / app.db). */
   private readonly dbPath = path.join(process.cwd(), 'data', 'app.db');
 
   onModuleInit(): void {
@@ -29,6 +28,10 @@ export class DatabaseService implements OnModuleInit, OnModuleDestroy {
 
   onModuleDestroy(): void {
     this.db?.close();
+  }
+
+  getDb(): Database.Database {
+    return this.db;
   }
 
   private runMigrations(): void {
